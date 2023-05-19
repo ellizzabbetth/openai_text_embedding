@@ -16,14 +16,13 @@ def get_embedding(text):
 
 
 def vector_similarity(vec1,vec2):
-    print('instide')
     """
     Returns the similarity between two vectors.
     
     Because OpenAI Embeddings are normalized to length 1, the cosine similarity is the same as the dot product.
     """
     x =  np.dot(np.array(vec1), np.array(vec2))
-    print(x)
+
     return x
 
 def embed_prompt_lookup():
@@ -31,9 +30,7 @@ def embed_prompt_lookup():
     question = input("What question do you have about a Unicorn company? ")
     # Get embedding
     prompt_embedding = get_embedding(question)
-    print(prompt_embedding)
-    print(df['embedding'])
-    print('done')
+
     # Get prompt similarity with embeddings
     # Note how this will overwrite the prompt similarity column each time!
     df["prompt_similarity"] = df['embedding'].apply(lambda vector: vector_similarity(vector, prompt_embedding))
